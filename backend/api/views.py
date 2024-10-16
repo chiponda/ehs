@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import generics
-from .serializers import UserSerializer, IncidentSerializer
+from .serializers import UserSerializer, IncidentSerializer,RiskSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Incident,Risk
 
@@ -38,7 +38,7 @@ class CreateUserView(generics.CreateAPIView):
 
 # Risk view
 class RiskCreate(generics.ListCreateAPIView):
-    serializer_class = IncidentSerializer
+    serializer_class = RiskSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
