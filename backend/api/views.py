@@ -1,18 +1,18 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import generics
-from .serializers import UserSerializer, IncidentSerializer,RiskSerializer
+from .serializers import UserSerializer, PatientSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .models import Incident,Risk
+from .models import Patient
 
 
-class IncidentCreate(generics.ListCreateAPIView):
-    serializer_class = IncidentSerializer
+class PatientCreate(generics.ListCreateAPIView):
+    serializer_class = PatientSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
-        return Incident.objects.filter(author=user)
+        return Patient.objects.filter(author=user)
 
     def perform_create(self, serializer):
         if serializer.is_valid():
@@ -22,12 +22,12 @@ class IncidentCreate(generics.ListCreateAPIView):
 
 
 class NoteDelete(generics.DestroyAPIView):
-    serializer_class = IncidentSerializer
+    serializer_class = PatientSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
-        return Incident.objects.filter(author=user)
+        return Patient.objects.filter(author=user)
 
 
 class CreateUserView(generics.CreateAPIView):
@@ -37,16 +37,3 @@ class CreateUserView(generics.CreateAPIView):
 
 
 # Risk view
-class RiskCreate(generics.ListCreateAPIView):
-    serializer_class = RiskSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        user = self.request.user
-        return Risk.objects.filter(author=user)
-
-    def perform_create(self, serializer):
-        if serializer.is_valid():
-            serializer.save(author=self.request.user)
-        else:
-            print(serializer.errors)

@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Incident,Risk
+from .models import Patient
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username", "password"]
+        fields = ["id", "username", "email","password"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
@@ -15,15 +15,10 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-class IncidentSerializer(serializers.ModelSerializer):
+class PatientSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Incident
-        fields = ["id", "title", "description","location","severity","date" ,"created_at", "author"]
+        model = Patient
+        fields = ["id", "id_number", "name","surname","address","dob","email","phone","gender","province" ,"created_at", "author"]
         extra_kwargs = {"author": {"read_only": True}}
 
 
-class RiskSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Risk
-        fields = ["id", "description","mitigation","location","created_at", "author"]
-        extra_kwargs = {"author": {"read_only": True}}

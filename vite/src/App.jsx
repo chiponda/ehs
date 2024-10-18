@@ -9,7 +9,7 @@ import NotFound from "./pages/NotFound"
 import ProtectedRoute from "./components/ProtectedRoute"
 import Home from './pages/Home'
 import { Test } from './pages/Test'
-import IncidentForm from './pages/IncidentForm'
+import PatientForm from './pages/PatientForm'
 import RiskForm from './pages/RiskForm'
 
 import { Another } from './pages/Another'
@@ -51,10 +51,10 @@ export default function App() {
           }
         />
           <Route
-          path="/AddIncidents"
+          path="/Add_Patient"
           element={
             <ProtectedRoute>
-              <IncidentForm/>
+              <PatientForm/>
              
             </ProtectedRoute>
           }
@@ -72,8 +72,8 @@ export default function App() {
         />
 
 <Route
-          path="/incidents"
-          name="incidents"
+          path="/patients"
+          name="patients"
           element={
             <ProtectedRoute>
               <Incidents/>

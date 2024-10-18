@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 
 
 // eslint-disable-next-line react/prop-types
-function Login({ route, method ,Links,statement ,statement2}) {
+function Form({ route, method ,Links,statement ,statement2}) {
     const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
+   
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -24,7 +24,7 @@ function Login({ route, method ,Links,statement ,statement2}) {
         e.preventDefault();
  
         try {
-            const res = await api.post(route, { username, email,password })
+            const res = await api.post(route, { username,password })
             if (method === "login") {
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
@@ -53,13 +53,7 @@ function Login({ route, method ,Links,statement ,statement2}) {
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Username"
             />
-             <input
-                className="form-input"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-            />
+             
             <input
                 className="form-input"
                 type="password"
@@ -80,4 +74,4 @@ function Login({ route, method ,Links,statement ,statement2}) {
     );
 }
 
-export default Login;
+export default Form

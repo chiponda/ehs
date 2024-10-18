@@ -98,13 +98,16 @@ WSGI_APPLICATION = "backend.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ehs',
+        'NAME': 'health',
         'USER': 'root',
         'PASSWORD': '1886',
         'HOST': 'localhost',  # Use '127.0.0.1' for local connections
         'PORT': '3306',  # Default MariaDB port
     }
 }
+
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
